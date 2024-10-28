@@ -1,7 +1,7 @@
 import uvicorn
 
 if __name__ == "__main__":
-    uvicorn.run("app.api:app", host='localhost', port=8000, reload=True)
+    uvicorn.run("app.api:app", host='79.174.86.5', port=8000, reload=True)
 #
 # from fastapi import FastAPI, Body, Depends
 # from fastapi_users import FastAPIUsers, fastapi_users
