@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Body, Depends
 from fastapi_users import FastAPIUsers, fastapi_users
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.auth.database import User
 from app.auth.auth import auth_backend
@@ -10,6 +11,15 @@ from app.auth.manager import get_user_manager
 
 app = FastAPI(
     title='idky App'
+)
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 fastapi_users = FastAPIUsers[User, int](
