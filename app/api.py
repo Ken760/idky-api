@@ -13,7 +13,6 @@ app = FastAPI(
     title='idky App'
 )
 
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
