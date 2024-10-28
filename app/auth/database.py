@@ -2,14 +2,15 @@ from typing import AsyncGenerator
 from datetime import datetime
 from fastapi import Depends
 from fastapi_users.db import SQLAlchemyBaseUserTableUUID, SQLAlchemyUserDatabase, SQLAlchemyBaseUserTable
-from sqlalchemy import String, Boolean, Integer, TIMESTAMP
+from sqlalchemy import String, Boolean, Integer, TIMESTAMP, ForeignKey
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 from app.models.models import role
 from config import DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME
 
-DATABASE_URL = f"postgresql+asyncpg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+DATABASE_URL = f"postgresql+asyncpg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}" #POSTGRESQL
+# DATABASE_URL = "sqlite+aiosqlite:///./test.db" #sqlite TEST
 
 
 class Base(DeclarativeBase):
@@ -24,10 +25,10 @@ class User(SQLAlchemyBaseUserTable[int], Base):
         String(length=1024), nullable=False
     )
     registered_at: Mapped[str] = mapped_column(
-        TIMESTAMP, default=datetime.utcnow
+        TIMESTAMP, default=datetime.now
     )
     role_id: Mapped[int] = mapped_column(
-        Integer, ForeignKey=role.c.id
+        Integer, ForeignKey(role.c.id)
     )
     email: Mapped[str] = mapped_column(
         String(length=320), unique=True, index=True, nullable=False
