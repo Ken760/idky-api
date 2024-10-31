@@ -12,22 +12,22 @@ from app.auth.manager import get_user_manager
 app = FastAPI(
     title='idky App'
 )
-
-origins = [
-    "http://79.174.86.5:8000",
-    "http://localhost:3000",
-    "http://localhost:8000",
-    "https://idky-theta.vercel.app"
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "OPTIONS", "DELETE", "PATCH", "PUT"],
-    allow_headers=["Content-Type", "Set-Cookie", "Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
-                   "Authorization"],
-)
+#
+# origins = [
+#     "http://79.174.86.5:8000",
+#     "http://localhost:3000",
+#     "http://localhost:8000",
+#     "https://idky-theta.vercel.app"
+# ]
+#
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=origins,
+#     allow_credentials=True,
+#     allow_methods=["GET", "POST", "OPTIONS", "DELETE", "PATCH", "PUT"],
+#     allow_headers=["Content-Type", "Set-Cookie", "Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
+#                    "Authorization"],
+# )
 
 fastapi_users = FastAPIUsers[User, int](
     get_user_manager,
